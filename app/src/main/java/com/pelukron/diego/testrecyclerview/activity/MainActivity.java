@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int size = input.size()+1;
-                for (int i = size; i < size + 50; i++) {
+                for (int i = size; i < size + 15; i++) {
                     input.add("Text"+i);
                     mAdapter.notifyDataSetChanged();
                 }
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         input = new ArrayList<String>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 15; i++) {
             input.add("Test"+i);
         }
 

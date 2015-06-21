@@ -5,9 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pelukron.diego.testrecyclerview.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -18,15 +20,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private ArrayList<String> mDataset;
     private LayoutInflater inflater;
+    private static Context context;
+    private final static String RANDOM_URL_IMAGE = "http://lorempixel.com/400/2";
+
+    public static void init(Context ctx){
+        context = ctx;
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView txtHeader;
         public TextView txtFooter;
+        public ImageView ivIcon;
 
         public ViewHolder(View v) {
             super(v);
             txtHeader = (TextView) v.findViewById(R.id.header);
             txtFooter = (TextView) v.findViewById(R.id.footer);
+            ivIcon = (ImageView) v.findViewById(R.id.icon);
         }
     }
 
@@ -65,6 +75,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         });
 
         viewHolder.txtFooter.setText("Footer: "+mDataset.get(i));
+
+        //add image random
+        if (i<100){
+        Picasso.with(context)
+                .load(RANDOM_URL_IMAGE+i)
+                .placeholder(R.mipmap.pablo_picasso)
+                .into(viewHolder.ivIcon);
+        } else {
+            if (i%2==0){
+                viewHolder.ivIcon.setImageResource(R.mipmap.pablo_picasso);
+            } else {
+                viewHolder.ivIcon.setImageResource(R.mipmap.weeping_woman_with_handkerchief);
+            }
+        }
     }
 
     @Override

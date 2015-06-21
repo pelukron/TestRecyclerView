@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pelukron.diego.testrecyclerview.R;
+import com.pelukron.diego.testrecyclerview.utilities.CircularImage;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private ArrayList<String> mDataset;
     private LayoutInflater inflater;
     private static Context context;
-    private final static String RANDOM_URL_IMAGE = "http://lorempixel.com/400/2";
+    private final static String RANDOM_URL_IMAGE = "http://lorempixel.com/400/";
 
     public static void init(Context ctx){
         context = ctx;
@@ -77,18 +78,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         viewHolder.txtFooter.setText("Footer: "+mDataset.get(i));
 
         //add image random
-        if (i<100){
         Picasso.with(context)
                 .load(RANDOM_URL_IMAGE+i)
                 .placeholder(R.mipmap.pablo_picasso)
+                .transform(new CircularImage())
                 .into(viewHolder.ivIcon);
-        } else {
-            if (i%2==0){
-                viewHolder.ivIcon.setImageResource(R.mipmap.pablo_picasso);
-            } else {
-                viewHolder.ivIcon.setImageResource(R.mipmap.weeping_woman_with_handkerchief);
-            }
-        }
+
     }
 
     @Override
